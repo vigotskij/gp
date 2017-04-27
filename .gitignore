@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+# Created by IDE
+*.cbp
+*.layout
+*.depend
+**bin
+**obj
