@@ -11,7 +11,14 @@
 
 struct Word
 {
-
+    /* microiteration 1.2, begin.
+     * resolvemos: 'items' no se declaró en este ámbito.
+     *
+     * justificación: "El lenguaje...", 4.1.
+     */
+    enum { MAX_STRING_LENGTH = 254, CONTAINER_CAPACITY = MAX_STRING_LENGTH + 1 };
+    char items[ CONTAINER_CAPACITY ] ;
+    // microiteration 1.2, end.
     bool isNull( void )
     {
         return items[ 0 ] == '\0' ;
