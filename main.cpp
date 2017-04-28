@@ -15,7 +15,20 @@
 
 struct Word
 {
-    // to define...
+    /* microiteration 0.2, begin.
+     * resolvemos "No member named 'isNull' in 'Word'"
+     *
+     * Justificacion:
+     * "Abstracción", abstracción de comportamiento -> verbo -> funcion
+     *
+     */
+    bool isNull( void )
+    {
+        bool result = true ;
+        // to define...
+        return result ;
+    }
+    // microiteration 0.2, end
 };
 
     //microiteración 0.1 end.
