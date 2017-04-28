@@ -1,5 +1,25 @@
 #include <iostream>
 
+    /*
+     * microiteración 0.1 begin
+     *  resolvemos: #plain "Word" tipo desconocido
+     *
+     *  justificación:
+     *      "Resolucion de problemas"
+     *      "Abstracción", mapeo de abstracciones entre
+     *          espacio del problema -> espacio de la solución, gap semántico
+     *      "Abstracción" abstracción de objeto(cosa) -> sustantivo -> Tipo, instancia
+     *      "Lenguaje de programación C++", 4.1 , 5.7.
+     *
+     */
+
+struct Word
+{
+    // to define...
+};
+
+    //microiteración 0.1 end.
+
 int main( int argc , const char * argv[] )
 {
     /*
