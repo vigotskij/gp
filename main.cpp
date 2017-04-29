@@ -33,9 +33,17 @@ Word getWordFromText( void )
     return word ;
 }
 
+/*
+ * Abordar la definición de "process"
+ */
 void process ( const Word& word )
 {
-    // to define...
+    // Por simplicidad, en este punto elegimos como "procesamiento de una palabra"
+    // la accion de mostrarla en el stdout, en nuestro caso en pantalla,
+
+    std::cout << word << std::endl ;
+
+    //
 }
 
 int main( int argc , const char * argv[] )
