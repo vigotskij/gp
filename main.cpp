@@ -23,6 +23,11 @@ struct Word
     {
         return items[ 0 ] == '\0' ;
     }
+    //microiteration 1.4
+    const char* c_string( void )
+    {
+        return &( items[ 0 ] ) ;
+    }
 };
 
 
@@ -36,12 +41,13 @@ Word getWordFromText( void )
 /*
  * Abordar la definición de "process"
  */
-void process ( const Word& word )
+void process ( Word thisWord )
 {
     // Por simplicidad, en este punto elegimos como "procesamiento de una palabra"
     // la accion de mostrarla en el stdout, en nuestro caso en pantalla,
 
-    std::cout << word << std::endl ;
+    //microiteration 1.4
+    std::cout << thisWord.c_string() << std::endl ;
 
     //
 }
