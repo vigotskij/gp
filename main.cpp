@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string.h>
 
     /*
      * microiteración 1.1 begin
@@ -28,6 +29,43 @@ struct Word
     {
         return &( items[ 0 ] ) ;
     }
+
+    /*
+     * microiteration 1.6, begin.
+     *
+     * 1. inicialización de una palabra con una cadena
+     *      void init (const char *) ;
+     *
+     * 2. la concatenacion de un caracter a una cadena
+     *      Word& concat( const Word& ) ;
+     *
+     * 3. la asignacion de una cadena a otra
+     *      Word& assign( const Word& ) ;
+     *
+     * justificación:
+     *      se deja como ejercicio al lector.
+     */
+
+     void init( const char* plainString ="" )
+     {
+         strcpy( items , plainString ) ;
+     }
+
+     Word& concat( char ch )
+     {
+         size_t len = strlen( items ) ;
+         items[ len ] = ch ;
+         items[ len + 1 ] = '\0' ;
+         return *this ;
+     }
+
+     Word& assign( const Word& word )
+     {
+         strcpy( items , word.items ) ;
+         return *this ;
+     }
+
+     // microiteration 1.6, end.
 };
 
 
@@ -67,20 +105,40 @@ Word getWordFromText( void )
     enum States { idle , working } ;
     static States state = idle ;
 
-    Word word = "" ;
+    // microiteration 1.6
+    Word word; word.init() ;
     bool done = false ;
 
     while ( !done )
     {
         if ( state == idle ) {
-            char ch std::cin.get() ;
+            char ch = std::cin.get() ;
             if ( contain( endOfText , ch ) )
             {
                 done = true ;
                 state = idle ;
             } else if ( contain( alphabet , ch ) )
             {
-                word = word + ch ;
+                // microiteration 1.6
+                // word = word + ch ;
+                word.concat( ch ) ;
+                state = working ;
+            } else if ( contain( delimiter , ch ) )
+            {
+                done = true ;
+                state = idle ;
+            }
+        } else if ( state == working ) {
+            char ch = std::cin.get() ;
+            if ( contain( endOfText , ch ) )
+            {
+                done = true ;
+                state = idle ;
+            } else if ( contain( alphabet , ch ) )
+            {
+                // microiteration 1.6
+                // word = word + ch ;
+                word.concat( ch ) ;
                 state = working ;
             } else if ( contain( delimiter , ch ) )
             {
