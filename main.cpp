@@ -31,12 +31,6 @@ struct Word
 };
 
 
-Word getWordFromText( void )
-{
-    Word word ;
-    // to define...
-    return word ;
-}
 
 /*
  * Abordar la definición de "process"
@@ -51,6 +45,54 @@ void process ( Word thisWord )
 
     //
 }
+
+// microiteración 1.5
+// aborda la definicion de "getWordFromText".
+typedef const char* SetOfChar ;
+
+SetOfChar alphabet = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ" ;
+SetOfChar delimiter = " ,;:" ;
+SetOfChar endOfText = "." ;
+
+bool contain( SetOfChar set , char ch )
+{
+    size_t cardinal = strlen( set ) ;
+    size_t idx = 0 ;
+    for ( ; idx < cardinal && set[ idx ] != ch ; idx++ ) ;
+    return ( idx < cardinal ) ;
+}
+
+Word getWordFromText( void )
+{
+    enum States { idle , working } ;
+    static States state = idle ;
+
+    Word word = "" ;
+    bool done = false ;
+
+    while ( !done )
+    {
+        if ( state == idle ) {
+            char ch std::cin.get() ;
+            if ( contain( endOfText , ch ) )
+            {
+                done = true ;
+                state = idle ;
+            } else if ( contain( alphabet , ch ) )
+            {
+                word = word + ch ;
+                state = working ;
+            } else if ( contain( delimiter , ch ) )
+            {
+                done = true ;
+                state = idle ;
+            }
+        }
+    }
+
+    return word ;
+}
+// microiteration 1.5 end.
 
 int main( int argc , const char * argv[] )
 {
