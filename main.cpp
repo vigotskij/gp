@@ -89,7 +89,7 @@ void process ( Word thisWord )
 typedef const char* SetOfChar ;
 
 SetOfChar alphabet = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ" ;
-SetOfChar delimiter = " ,;:" ;
+SetOfChar delimiter = " ,;:?" ;
 SetOfChar endOfText = "." ;
 
 bool contain( SetOfChar set , char ch )
@@ -102,10 +102,17 @@ bool contain( SetOfChar set , char ch )
 
 Word getWordFromText( void )
 {
-    enum States { idle , working } ;
-    static States state = idle ;
 
     // microiteration 1.6
+    /**
+     * microiteration 1.7, begin.
+     * agrega el estado "ending" para recordar
+     * que fue alcanzado el fin del texto.
+     *
+     */
+    enum States { idle , working , ending } ;
+    static States state = idle ;
+
     Word word; word.init() ;
     bool done = false ;
 
@@ -115,8 +122,9 @@ Word getWordFromText( void )
             char ch = std::cin.get() ;
             if ( contain( endOfText , ch ) )
             {
-                done = true ;
-                state = idle ;
+                // done = true ;
+                // state = idle ;
+                state = ending ;
             } else if ( contain( alphabet , ch ) )
             {
                 // microiteration 1.6
@@ -125,15 +133,17 @@ Word getWordFromText( void )
                 state = working ;
             } else if ( contain( delimiter , ch ) )
             {
-                done = true ;
-                state = idle ;
+                // done = true ;
+                // state = idle ;
+                ;
             }
         } else if ( state == working ) {
             char ch = std::cin.get() ;
             if ( contain( endOfText , ch ) )
             {
                 done = true ;
-                state = idle ;
+                // state = idle ;
+                state = ending ;
             } else if ( contain( alphabet , ch ) )
             {
                 // microiteration 1.6
@@ -145,6 +155,9 @@ Word getWordFromText( void )
                 done = true ;
                 state = idle ;
             }
+        } else if ( state == ending ) {
+            done = true ;
+            state = idle ;
         }
     }
 
@@ -155,13 +168,13 @@ Word getWordFromText( void )
 int main( int argc , const char * argv[] )
 {
     unsigned count = 0 ;
-    Word word ;
-    word = getWordFromText() ;
+    Word word ; word.init() ;
+    word.assign( getWordFromText() );
     while ( !( word.isNull() ) )
     {
         process( word ) ;
         count++ ;
-        word = getWordFromText() ;
+        word.assign( getWordFromText() ) ;
     }
     std::cout << "words in text: " << count << std::endl ;
     // microiteration 1.1, end.
